@@ -1,4 +1,4 @@
-# NPM 脚本运行器 (nrs)
+# scriptz-cli (nrs)
 
 [English](./README.md) | 简体中文
 
