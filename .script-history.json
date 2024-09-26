@@ -1,0 +1,10 @@
+{
+  "lastRun": "prepare",
+  "/Users/zhongzichen/Develop/zzcyes-github/react-boilerplate-cra-template": [
+    "commit",
+    "start"
+  ],
+  "/path/to/project": [
+    "script3"
+  ]
+}
