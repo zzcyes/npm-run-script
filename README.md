@@ -2,9 +2,11 @@
 
 English | [简体中文](./README.zh-cn.md)
 
-![demo](./demo.png)
-
 NPM Script Runner is a command-line tool for visualizing and running scripts from package.json. It provides an interactive interface that makes finding and executing npm scripts easier.
+
+![nrs](assets/nrs-l.png)
+
+![nrs](assets/nrs-l-done.png)
 
 ## Features
 
@@ -19,13 +21,13 @@ NPM Script Runner is a command-line tool for visualizing and running scripts fro
 Global installation:
 
 ```bash
-npm install -g npm-run-script
+npm install -g scriptz-cli
 ```
 
 Or local installation in a project:
 
 ```bash
-npm install --save-dev npm-run-script
+npm install --save-dev scriptz-cli
 ```
 
 ## Usage
@@ -37,6 +39,8 @@ nrs
 ```
 
 This will display help information and available commands.
+
+![nrs](assets/nrs.png)
 
 ### List and Select Scripts to Run
 
@@ -85,11 +89,3 @@ nrs -rl
 ```bash
 nrs --list-all
 ```
-
-## Contributing
-
-Contributions are welcome, including code contributions, issue reports, or improvement suggestions. Please visit our GitHub repository: [npm-run-script](https://github.com/your-username/npm-run-script)
-
-## License
-
-MIT

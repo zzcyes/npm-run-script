@@ -87,7 +87,30 @@ const getScriptChoices = (scripts) =>
     label: `${color.green(name)} ${color.dim(`- ${command}`)}`,
   }));
 
-const selectScript = async (scriptChoices, listOnly) => {
+const selectScript = async (scriptChoices, listOnly, searchTerm) => {
+  if (searchTerm) {
+    const filteredChoices = scriptChoices.filter((choice) =>
+      choice.value.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
+    if (filteredChoices.length === 0) {
+      console.log(color.yellow(t("noMatchingScripts")));
+      process.exit(0);
+    }
+
+    const selectedScript = await select({
+      message: t("selectMatchingScript"),
+      options: filteredChoices,
+    });
+
+    if (isCancel(selectedScript)) {
+      outro(color.yellow(t("operationCancelled")));
+      process.exit(0);
+    }
+
+    return selectedScript;
+  }
+
   if (listOnly) {
     const selectedScript = await select({
       message: t("selectScript"),
@@ -107,6 +130,11 @@ const selectScript = async (scriptChoices, listOnly) => {
 };
 
 const runSelectedScript = (projectPath, selectedScript) => {
+  if (!selectedScript) {
+    outro(color.yellow(t("noScriptSelected")));
+    process.exit(0);
+  }
+
   console.log(`\n${t("running")} ${color.cyan(selectedScript)}`);
 
   const child = spawn("npm", ["run", selectedScript], {
@@ -153,7 +181,9 @@ const runScript = async (options = {}) => {
       outro(color.yellow(`${t("noRecentScript")} ${recentIndex + 1}.`));
       process.exit(0);
     }
-  } else if (!searchTerm && !listOnly) {
+  } else if (searchTerm) {
+    selectedScript = await selectScript(scriptChoices, false, searchTerm);
+  } else if (!listOnly) {
     const recentCommands = getRecentCommands(projectPath);
     if (recentCommands.length > 0 && scripts[recentCommands[0]]) {
       const runLast = await confirm({
@@ -180,6 +210,7 @@ const runScript = async (options = {}) => {
     runSelectedScript(projectPath, selectedScript);
   } else {
     outro(color.bgCyan(` ${t("thanks")} `));
+    process.exit(0);
   }
 
   return selectedScript;
@@ -226,7 +257,7 @@ program
   .option("--list-all", t("listAllScripts"))
   //   .option("--lang <language>", t("changeLanguage"))
   .action(async (options, command) => {
-    // 检查是否有未知的命令
+    // 检查是否有未知的命���
     if (command.args.length > 0) {
       console.log(
         color.yellow(t("unknownCommand", { command: command.args[0] }))

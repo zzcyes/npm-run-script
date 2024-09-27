@@ -1,17 +1,17 @@
 {
     "name": "scriptz-cli",
-    "version": "0.0.1",
+    "version": "0.0.3",
     "description": "A CLI tool to visualize and run npm scripts",
-    "main": "dist/index.cjs",
-    "module": "dist/index.mjs",
+    "main": "lib/index.cjs",
+    "module": "lib/index.mjs",
     "exports": {
         ".": {
-            "require": "./dist/index.cjs",
-            "import": "./dist/index.mjs"
+            "require": "./lib/index.cjs",
+            "import": "./lib/index.mjs"
         }
     },
     "bin": {
-        "nrs": "dist/index.cjs"
+        "nrs": "lib/index.cjs"
     },
     "scripts": {
         "start": "node run-script.js",
@@ -19,10 +19,11 @@
         "prepublishOnly": "npm run build"
     },
     "files": [
-        "dist",
+        "lib",
         "README.md",
         "README.zh-cn.md",
-        "demo.png"
+        "demo.png",
+        "LICENSE"
     ],
     "dependencies": {
         "@clack/prompts": "^0.7.0",
@@ -42,10 +43,10 @@
     "license": "MIT",
     "repository": {
         "type": "git",
-        "url": "https://github.com/your-username/npm-run-script.git"
+        "url": "https://github.com/zzcyes/scriptz-cli.git"
     },
     "bugs": {
-        "url": "https://github.com/your-username/npm-run-script/issues"
+        "url": "https://github.com/zzcyes/scriptz-cli/issues"
     },
-    "homepage": "https://github.com/your-username/npm-run-script#readme"
+    "homepage": "https://github.com/zzcyes/scriptz-cli#readme"
 }

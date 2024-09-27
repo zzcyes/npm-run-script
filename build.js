@@ -3,7 +3,7 @@ const path = require("path");
 const fs = require("fs");
 
 const entryPoint = path.join(__dirname, "run-script.js");
-const outDir = path.join(__dirname, "dist");
+const outDir = path.join(__dirname, "lib");
 
 const commonConfig = {
   entryPoints: [entryPoint],
@@ -36,47 +36,50 @@ const builds = [
 
 Promise.all(builds.map((config) => esbuild.build(config)))
   .then(() => {
-    // Create package.json in dist directory
-    const packageJson = require("./package.json");
-    const distPackageJson = {
-      name: packageJson.name,
-      version: packageJson.version,
-      description: packageJson.description,
-      main: "index.cjs",
-      module: "index.mjs",
-      exports: {
-        ".": {
-          require: "./index.cjs",
-          import: "./index.mjs",
-        },
-      },
-      bin: {
-        nrs: "index.cjs",
-      },
-      dependencies: packageJson.dependencies,
-      author: packageJson.author,
-      license: packageJson.license,
-      repository: packageJson.repository,
-      bugs: packageJson.bugs,
-      homepage: packageJson.homepage,
-    };
+    // // Create package.json in dist directory
+    // const packageJson = require("./package.json");
+    // const distPackageJson = {
+    //   name: packageJson.name,
+    //   version: packageJson.version,
+    //   description: packageJson.description,
+    //   main: "index.cjs",
+    //   module: "index.mjs",
+    //   exports: {
+    //     ".": {
+    //       require: "./index.cjs",
+    //       import: "./index.mjs",
+    //     },
+    //   },
+    //   bin: {
+    //     nrs: "index.cjs",
+    //   },
+    //   dependencies: packageJson.dependencies,
+    //   author: packageJson.author,
+    //   license: packageJson.license,
+    //   repository: packageJson.repository,
+    //   bugs: packageJson.bugs,
+    //   homepage: packageJson.homepage,
+    // };
 
-    fs.writeFile(
-      path.join(outDir, "package.json"),
-      JSON.stringify(distPackageJson, null, 2),
-      (err) => {
-        if (err) {
-          console.error(
-            "\x1b[31mFailed to create dist/package.json:",
-            err,
-            "\x1b[0m"
-          );
-          process.exit(1);
-        }
-        console.log(
-          "\x1b[32mBuild completed. Different module formats generated. package.json has been created in the dist directory.\x1b[0m"
-        );
-      }
+    // fs.writeFile(
+    //   path.join(outDir, "package.json"),
+    //   JSON.stringify(distPackageJson, null, 2),
+    //   (err) => {
+    //     if (err) {
+    //       console.error(
+    //         "\x1b[31mFailed to create dist/package.json:",
+    //         err,
+    //         "\x1b[0m"
+    //       );
+    //       process.exit(1);
+    //     }
+    //     console.log(
+    //       "\x1b[32mBuild completed. Different module formats generated. package.json has been created in the dist directory.\x1b[0m"
+    //     );
+    //   }
+    // );
+    console.log(
+      "\x1b[32mBuild completed. Different module formats generated. package.json has been created in the lib directory.\x1b[0m"
     );
   })
   .catch((error) => {

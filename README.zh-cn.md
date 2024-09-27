@@ -4,7 +4,9 @@
 
 NPM 脚本运行器是一个命令行工具，用于可视化展示和运行 package.json 中的脚本。它提供了一个交互式界面，使得查找和执行 npm 脚本变得更加容易。
 
-![demo](./demo.png)
+![nrs](assets/nrs-l.png)
+
+![nrs](assets/nrs-l-done.png)
 
 ## 特性
 
@@ -19,13 +21,13 @@ NPM 脚本运行器是一个命令行工具，用于可视化展示和运行 pac
 全局安装：
 
 ```bash
-npm install -g npm-run-script
+npm install -g scriptz-cli
 ```
 
 或者在项目中本地安装：
 
 ```bash
-npm install --save-dev npm-run-script
+npm install --save-dev scriptz-cli
 ```
 
 ## 使用方法
@@ -37,6 +39,8 @@ nrs
 ```
 
 这将显示帮助信息和可用的命令。
+
+![nrs](assets/nrs.png)
 
 ### 列出并选择要运行的脚本
 
@@ -68,7 +72,6 @@ nrs -r
 ```bash
 nrs -r --<n>
 ```
-
 
 例如，运行第 2 个最近使用的脚本：
 
